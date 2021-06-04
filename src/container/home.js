@@ -5,7 +5,6 @@ import Data from '../Data/Data.js'
 const Home = ({navigation}) => {
   
   let data = Data
-  
 
   return (
     <View style={styles.container}>
