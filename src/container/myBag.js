@@ -1,7 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View,ScrollView , Image,TouchableOpacity} from 'react-native'
 
-const MyBag = ({navigation}) => {
+const MyBag = ({route,navigation}) => {
+    const data = route.params.goTo
+    console.log(data);
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -22,29 +24,14 @@ const MyBag = ({navigation}) => {
             <ScrollView style={{padding:20,}}>
                 <View style={styles.pathItem}>
                     <View style={styles.image}>
-                        <Image style={{height:'70%',width:'70%'}} source={require('../icon/downshifter-10-running-shoe-CrpbbD-removebg-preview.png')} />
+                        <Image style={{height:'70%',width:'70%'}} source={{uri : data.image}} />
                     </View>
                     <View style={styles.pathKet}>
-                        <Text style={{fontWeight:'bold',fontSize:17}}>Nike Air Max 97</Text>
+                        <Text style={{fontWeight:'bold',fontSize:17}}>{data.name}</Text>
                         <View style={styles.pathPrice}>
                         <View style={{flexDirection:'row'}}>
                            <Text>$</Text>
-                           <Text> 299.000</Text>
-                        </View>
-                           <Text style={{color:'#a9a9a9'}}>x1</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.pathItem}>
-                    <View style={styles.image}>
-                        <Image style={{height:'70%',width:'70%'}} source={require('../icon/shoes.png')} />
-                    </View>
-                    <View style={styles.pathKet}>
-                        <Text style={{fontWeight:'bold',fontSize:17}}>Adidas Air Max 97</Text>
-                        <View style={styles.pathPrice}>
-                        <View style={{flexDirection:'row'}}>
-                           <Text>$</Text>
-                           <Text> 299.000</Text>
+                           <Text> {data.price}</Text>
                         </View>
                            <Text style={{color:'#a9a9a9'}}>x1</Text>
                         </View>
@@ -55,9 +42,9 @@ const MyBag = ({navigation}) => {
             <View style={styles.bottom}>
                 <View style={styles.pactBottom}>
                     <Text style={{fontSize:20,fontWeight:'bold',color:'#a9a9a9'}}>Total</Text>
-                    <Text style={{fontWeight:'bold',fontSize:20,color:'#000000'}}>$508.000</Text>
+                    <Text style={{fontWeight:'bold',fontSize:20,color:'#000000'}}>$ {data.price}</Text>
                 </View>
-                <TouchableOpacity style={styles.bottomB}>
+                <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={styles.bottomB}>
                     <Text style={{color:'#ffffff',fontSize:15,}}>Checkout</Text>
                 </TouchableOpacity>
             </View>

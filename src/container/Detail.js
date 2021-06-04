@@ -5,28 +5,27 @@ import Ukuran from '../Data/Ukuran.js'
 const Detail = ({route,navigation}) => { 
     
     const data = route.params.data
-    console.log(data);
     let uk = Ukuran
-    
+
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView>                
                 <View style={styles.HeaderBG}>
                     <TouchableOpacity onPress={()=> navigation.goBack()} style={styles.header}>
                         <Image style={{height:20,width:20}} source={{uri:'https://cdn1.iconfinder.com/data/icons/essentials-pack/96/left_arrow_back_previous_navigation-256.png'}} />
                     </TouchableOpacity>
-                    <Image style={{height:'70%',width:'70%'}} source={require('../icon/downshifter-10-running-shoe-CrpbbD-removebg-preview.png')} />
+                    <Image style={{height:'70%',width:'70%'}} source={{uri : data.image}} />
                 </View>
                 <View style={styles.body}>
                     <View style={{height:35}}>
                         <Image style={{height:35,width:35}} source={{uri:'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/230_Nike_logo-256.png'}} />
                     </View>
                     <View style={styles.TextName}>
-                        <Text style={{fontWeight:'bold',fontSize:30}}>Nike Air Max 97</Text>
+                        <Text style={{fontWeight:'bold',fontSize:30}}>{data.name}</Text>
                     </View>
                     <View style={styles.TextName}>
                         <Text style={{fontWeight:'bold',fontSize:20,marginRight:10}}>$</Text>
-                        <Text style={{fontWeight:'bold',fontSize:20}}>299.000</Text>
+                        <Text style={{fontWeight:'bold',fontSize:20}}>{data.price}</Text>
                     </View>
                 </View>
                 <View style={styles.uk}>
@@ -34,21 +33,11 @@ const Detail = ({route,navigation}) => {
                     <Text style={{fontWeight:'bold',color:'#a9a9'}}>Size Guide</Text>
                 </View>
                 <ScrollView horizontal style={{padding:20,paddingHorizontal:10}}>
-                    <TouchableOpacity style={styles.noUk}>
-                        <Text style={{fontSize:18,}}>40</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.noUk}>
-                        <Text style={{fontSize:18,}}>41</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.noUk}>
-                        <Text style={{fontSize:18,}}>41,5</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.noUk}>
-                        <Text style={{fontSize:20,}}>42</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.noUk}>
-                        <Text style={{fontSize:20,}}>42,5</Text>
-                    </TouchableOpacity>
+                    {uk.map((dummy) => (
+                        <TouchableOpacity style={styles.noUk}>
+                            <Text style={{fontSize:18,}}>{dummy.ukuran}</Text>
+                        </TouchableOpacity>
+                    ))}
                 </ScrollView>
                 <View style={styles.pactSize}>
                     <Text style={{fontWeight:'bold'}}>Description</Text>
@@ -59,7 +48,7 @@ const Detail = ({route,navigation}) => {
                 <TouchableOpacity style={styles.love}>
                     <Image style={styles.icon} source={{uri:'https://cdn0.iconfinder.com/data/icons/feather/96/heart-256.png'}} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> navigation.navigate('MyBag')} style={styles.love1}>
+                <TouchableOpacity onPress={()=> navigation.navigate('MyBag', {goTo: data})} style={styles.love1}>
                     <Text style={styles.text}>Add to Cart</Text>
                 </TouchableOpacity>
             </View>
